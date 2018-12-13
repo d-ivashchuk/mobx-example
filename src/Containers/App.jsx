@@ -15,6 +15,8 @@ import {
   Col,
 } from 'react-bootstrap';
 
+import styles from './App.module.css';
+
 // const StyledTodo = styled.li`
 //   opacity: ${props => (props.completed ? '0.7' : '1')};
 //   text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
@@ -49,7 +51,10 @@ class App extends Component {
           checked={element.complete}
           onChange={() => this.toggleComplete(element)}
         />
-        <div className="todo" completed={element.complete}>
+        <div
+          className={!element.complete ? styles.todo : styles.completed}
+          completed={element.complete}
+        >
           {element.value}
         </div>
       </ListGroupItem>

@@ -1,0 +1,10 @@
+.todo {
+  font-size: 16px;
+  color: #bada55;
+  text-align: center;
+}
+.completed {
+  composes: todo;
+  color: #fa113d;
+  text-decoration: line-through;
+}
