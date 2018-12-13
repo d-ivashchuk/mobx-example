@@ -16,14 +16,6 @@ const StyledInput = styled.input`
   border-radius: 1px;
   border: none;
 `;
-const StyledButton = styled.button`
-  cursor: pointer;
-  font-size: 16px;
-  padding: 8px;
-  border-radius: 5px;
-  border: none;
-  color: #777;
-`;
 
 @observer
 class App extends Component {
@@ -37,9 +29,10 @@ class App extends Component {
   filter(e) {
     this.props.store.filter = e.target.value;
   }
-  toggleComplete(todo) {
+
+  toggleComplete = todo => {
     todo.complete = !todo.complete;
-  }
+  };
 
   render() {
     const { filter, filteredToDos, clearCompleted } = this.props.store;
@@ -74,7 +67,7 @@ class App extends Component {
           </div>
 
           <ul style={{ listStyleType: 'none', padding: '0' }}>{toDosList}</ul>
-          <StyledButton onClick={clearCompleted}>Clear Completed</StyledButton>
+          <button onClick={clearCompleted}>Clear Completed</button>
         </header>
       </div>
     );

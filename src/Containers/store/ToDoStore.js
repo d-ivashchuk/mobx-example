@@ -2,7 +2,9 @@ import { observable, computed } from 'mobx';
 
 class ToDo {
   @observable value;
+
   @observable id;
+
   @observable complete;
 
   constructor(value) {
@@ -14,7 +16,9 @@ class ToDo {
 
 class ToDoStore {
   @observable toDos = [];
+
   @observable filter = '';
+
   @computed get filteredToDos() {
     const matchesFilter = new RegExp(this.filter, 'i');
     return this.toDos.filter(
@@ -25,6 +29,7 @@ class ToDoStore {
   createToDo(value) {
     this.toDos.push(new ToDo(value));
   }
+
   clearCompleted = () => {
     const incompleteToDos = this.toDos.filter(todo => !todo.complete);
     this.toDos.replace(incompleteToDos);
