@@ -1,34 +1,38 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-import styled from 'styled-components';
 import { observer } from 'mobx-react';
 
-const StyledTodo = styled.li`
-  opacity: ${props => (props.completed ? '0.7' : '1')};
-  text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
-  transition: all 0.3s;
-`;
-const StyledInput = styled.input`
-  margin: 15px;
-  font-size: 16px;
-  padding: 8px;
-  border-radius: 1px;
-  border: none;
-`;
+import {
+  ButtonToolbar,
+  Button,
+  ListGroup,
+  ListGroupItem,
+  PageHeader,
+  FormControl,
+  Grid,
+  Row,
+  Col,
+} from 'react-bootstrap';
+
+// const StyledTodo = styled.li`
+//   opacity: ${props => (props.completed ? '0.7' : '1')};
+//   text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
+//   transition: all 0.3s;
+// `;
 
 @observer
 class App extends Component {
-  createNew(e) {
+  createNew = e => {
     if (e.which === 13) {
       this.props.store.createToDo(e.target.value);
       e.target.value = '';
     }
-  }
+  };
 
-  filter(e) {
+  filter = e => {
     this.props.store.filter = e.target.value;
-  }
+  };
 
   toggleComplete = todo => {
     todo.complete = !todo.complete;
@@ -37,38 +41,49 @@ class App extends Component {
   render() {
     const { filter, filteredToDos, clearCompleted } = this.props.store;
     const toDosList = filteredToDos.map((element, index) => (
-      <StyledTodo key={index} completed={element.complete}>
-        <StyledInput
+      <ListGroupItem key={index} completed={element.complete}>
+        <FormControl
           style={{ marginRight: '15px' }}
           type="checkbox"
           value={element.complete}
           checked={element.complete}
-          onChange={this.toggleComplete.bind(this, element)}
+          onChange={() => this.toggleComplete(element)}
         />
-        {element.value}
-      </StyledTodo>
+        <div className="todo" completed={element.complete}>
+          {element.value}
+        </div>
+      </ListGroupItem>
     ));
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>MobX Todo App</h1>
-          <div>
-            <StyledInput
+        <Grid>
+          <Row className="show-grid">
+            <Col md={12}>
+              <PageHeader>MobX Todo App</PageHeader>
+            </Col>
+
+            <FormControl
+              bsClass="input"
               type="text"
               placeholder="New todo"
-              onKeyPress={this.createNew.bind(this)}
+              onKeyPress={this.createNew}
             />
-            <StyledInput
+            <FormControl
+              bsClass="input"
               type="text"
               placeholder="search"
               value={filter}
-              onChange={this.filter.bind(this)}
+              onChange={this.filter}
             />
-          </div>
+          </Row>
 
-          <ul style={{ listStyleType: 'none', padding: '0' }}>{toDosList}</ul>
-          <button onClick={clearCompleted}>Clear Completed</button>
-        </header>
+          <ListGroup>{toDosList}</ListGroup>
+          <ButtonToolbar>
+            <Button bsStyle="primary" onClick={clearCompleted}>
+              Clear Completed
+            </Button>
+          </ButtonToolbar>
+        </Grid>
       </div>
     );
   }
