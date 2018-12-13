@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./Containers/App";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import store from "./Containers/store/ToDoStore";
+
+ReactDOM.render(<App store={store} />, document.getElementById("root"));
 
 serviceWorker.unregister();
