@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import "../App.css";
+import React, { Component } from 'react';
+import '../App.css';
 
-import styled from "styled-components";
-import { observer } from "mobx-react";
+import styled from 'styled-components';
+import { observer } from 'mobx-react';
 
 const StyledTodo = styled.li`
-  opacity: ${props => (props.completed ? "0.7" : "1")};
-  text-decoration: ${props => (props.completed ? "line-through" : "none")};
+  opacity: ${props => (props.completed ? '0.7' : '1')};
+  text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
   transition: all 0.3s;
 `;
 const StyledInput = styled.input`
@@ -30,7 +30,7 @@ class App extends Component {
   createNew(e) {
     if (e.which === 13) {
       this.props.store.createToDo(e.target.value);
-      e.target.value = "";
+      e.target.value = '';
     }
   }
 
@@ -46,7 +46,7 @@ class App extends Component {
     const toDosList = filteredToDos.map((element, index) => (
       <StyledTodo key={index} completed={element.complete}>
         <StyledInput
-          style={{ marginRight: "15px" }}
+          style={{ marginRight: '15px' }}
           type="checkbox"
           value={element.complete}
           checked={element.complete}
@@ -73,7 +73,7 @@ class App extends Component {
             />
           </div>
 
-          <ul style={{ listStyleType: "none", padding: "0" }}>{toDosList}</ul>
+          <ul style={{ listStyleType: 'none', padding: '0' }}>{toDosList}</ul>
           <StyledButton onClick={clearCompleted}>Clear Completed</StyledButton>
         </header>
       </div>

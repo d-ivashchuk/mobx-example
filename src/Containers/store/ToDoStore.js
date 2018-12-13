@@ -1,4 +1,4 @@
-import { observable, computed } from "mobx";
+import { observable, computed } from 'mobx';
 
 class ToDo {
   @observable value;
@@ -14,11 +14,11 @@ class ToDo {
 
 class ToDoStore {
   @observable toDos = [];
-  @observable filter = "";
+  @observable filter = '';
   @computed get filteredToDos() {
-    const matchesFilter = new RegExp(this.filter, "i");
+    const matchesFilter = new RegExp(this.filter, 'i');
     return this.toDos.filter(
-      todo => !this.filter || matchesFilter.test(todo.value)
+      todo => !this.filter || matchesFilter.test(todo.value),
     );
   }
 

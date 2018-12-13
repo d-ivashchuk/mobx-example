@@ -1,0 +1,54 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
+  },
+  "globals": {
+    "document": true,
+    "window": true,
+    "FormData": true,
+    "File": true
+  },
+  "rules": {
+    "no-plusplus": 0,
+    "indent": 0,
+    "arrow-parens": 0,
+    "max-len": 0,
+    "no-underscore-dangle": 0,
+    "no-param-reassign": 0,
+    "no-restricted-syntax": 0,
+    "no-template-curly-in-string": 0,
+    "no-else-return": 0,
+    "no-mixed-operators": 0,
+    "no-confusing-arrow": 0,
+    "comma-dangle": 0,
+    "no-nested-ternary": 0,
+    "implicit-arrow-linebreak": 0,
+    "object-curly-newline": 0,
+    "function-paren-newline": 0,
+    "func-names": 0,
+    "camelcase": 0,
+    "arrow-body-style": 0,
+    "guard-for-in": 0,
+    "operator-linebreak": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+    "react/prop-types": 0,
+    "react/no-multi-comp": 0,
+    "react/prefer-stateless-function": 0,
+    "react/no-array-index-key": 0,
+    "react/sort-comp": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/destructuring-assignment": 0,
+    "react/jsx-wrap-multilines": 0,
+    "react/jsx-indent": 0,
+    "react/button-has-type": 0,
+    "jsx-a11y/no-static-element-interactions": 0
+  },
+  "settings": {
+    "import/resolver": "webpack"
+  }
+}
