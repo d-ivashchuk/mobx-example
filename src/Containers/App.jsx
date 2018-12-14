@@ -54,10 +54,12 @@ class App extends Component {
 
     const validationSchema = Yup.object().shape({
       todo: Yup.string()
-        .min(3, 'Try using more explicit todos to achive better results')
-        .required('Type some text to add todo'),
+        .default('')
+        .required('Type some text to add todo')
+        .min(3, 'Try using more explicit todos to achive better results'),
     });
 
+    console.log(validationSchema.default());
     return (
       <div className="App">
         <Grid>
@@ -75,9 +77,9 @@ class App extends Component {
                 resetForm();
               }}
             >
-              {({ isSubmitting, values }) => (
+              {({ isSubmitting }) => (
                 <Form>
-                  <Field type="text" name="todo" value={values.todo || ''} />
+                  <Field type="text" name="todo" />
                   <ErrorMessage
                     className={styles.error}
                     name="todo"
