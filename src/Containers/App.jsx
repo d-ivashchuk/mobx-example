@@ -3,7 +3,7 @@ import '../App.css';
 
 import { observer } from 'mobx-react';
 
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 import {
@@ -19,6 +19,8 @@ import {
 } from 'react-bootstrap';
 
 import styles from './App.module.css';
+
+import CustomField from '../Components/CustomField';
 
 @observer
 class App extends Component {
@@ -59,7 +61,6 @@ class App extends Component {
         .min(3, 'Try using more explicit todos to achive better results'),
     });
 
-    console.log(validationSchema.default());
     return (
       <div className="App">
         <Grid>
@@ -79,12 +80,7 @@ class App extends Component {
             >
               {({ isSubmitting }) => (
                 <Form>
-                  <Field type="text" name="todo" />
-                  <ErrorMessage
-                    className={styles.error}
-                    name="todo"
-                    component="div"
-                  />
+                  <Field type="text" name="todo" component={CustomField} />
                   <button type="submit" disabled={isSubmitting}>
                     Add todo
                   </button>
