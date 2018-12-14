@@ -3,6 +3,9 @@ import '../App.css';
 
 import { observer } from 'mobx-react';
 
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
 import {
   ButtonToolbar,
   Button,
@@ -17,19 +20,10 @@ import {
 
 import styles from './App.module.css';
 
-// const StyledTodo = styled.li`
-//   opacity: ${props => (props.completed ? '0.7' : '1')};
-//   text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
-//   transition: all 0.3s;
-// `;
-
 @observer
 class App extends Component {
-  createNew = e => {
-    if (e.which === 13) {
-      this.props.store.createToDo(e.target.value);
-      e.target.value = '';
-    }
+  createNew = value => {
+    this.props.store.createToDo(value);
   };
 
   filter = e => {
@@ -42,6 +36,7 @@ class App extends Component {
 
   render() {
     const { filter, filteredToDos, clearCompleted } = this.props.store;
+
     const toDosList = filteredToDos.map((element, index) => (
       <ListGroupItem key={index} completed={element.complete}>
         <FormControl
@@ -59,6 +54,13 @@ class App extends Component {
         </div>
       </ListGroupItem>
     ));
+
+    const validationSchema = Yup.object().shape({
+      todo: Yup.string()
+        .min(3, 'Try using more explicit todos to achive better results')
+        .required('Type some text to add todo'),
+    });
+
     return (
       <div className="App">
         <Grid>
@@ -67,12 +69,30 @@ class App extends Component {
               <PageHeader>MobX Todo App</PageHeader>
             </Col>
 
-            <FormControl
-              bsClass="input"
-              type="text"
-              placeholder="New todo"
-              onKeyPress={this.createNew}
-            />
+            <Formik
+              initialValues={{ todo: '' }}
+              validationSchema={validationSchema}
+              onSubmit={(values, { setSubmitting, resetForm }) => {
+                this.createNew(values.todo);
+                setSubmitting(false);
+                resetForm({});
+              }}
+            >
+              {({ isSubmitting, values }) => (
+                <Form>
+                  <Field type="text" name="todo" value={values.todo || ''} />
+                  <ErrorMessage
+                    className={styles.error}
+                    name="todo"
+                    component="div"
+                  />
+                  <button type="submit" disabled={isSubmitting}>
+                    Add todo
+                  </button>
+                </Form>
+              )}
+            </Formik>
+
             <FormControl
               bsClass="input"
               type="text"

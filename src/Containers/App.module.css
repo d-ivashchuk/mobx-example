@@ -8,3 +8,7 @@
   color: #fa113d;
   text-decoration: line-through;
 }
+
+.error {
+  color: #c21515;
+}
