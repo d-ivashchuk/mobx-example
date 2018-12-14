@@ -38,7 +38,7 @@ class App extends Component {
     const { filter, filteredToDos, clearCompleted } = this.props.store;
 
     const toDosList = filteredToDos.map((element, index) => (
-      <ListGroupItem key={index} completed={element.complete}>
+      <ListGroupItem key={index}>
         <FormControl
           style={{ marginRight: '15px' }}
           type="checkbox"
@@ -46,10 +46,7 @@ class App extends Component {
           checked={element.complete}
           onChange={() => this.toggleComplete(element)}
         />
-        <div
-          className={!element.complete ? styles.todo : styles.completed}
-          completed={element.complete}
-        >
+        <div className={!element.complete ? styles.todo : styles.completed}>
           {element.value}
         </div>
       </ListGroupItem>
@@ -70,12 +67,12 @@ class App extends Component {
             </Col>
 
             <Formik
-              initialValues={{ todo: '' }}
+              initialValues={validationSchema.default()}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
                 this.createNew(values.todo);
                 setSubmitting(false);
-                resetForm({});
+                resetForm();
               }}
             >
               {({ isSubmitting, values }) => (
