@@ -1,12 +1,15 @@
 import React from 'react';
 
 import { FormControl, ControlLabel } from 'react-bootstrap';
+import { connect, getIn } from 'formik';
 
 const CustomField = ({
   field, // { name, value, onChange, onBlur }
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
+  const error = getIn(props.formik.errors, props.name);
+  console.log(error);
   return (
     <div>
       <ControlLabel>{field.name}</ControlLabel>
@@ -18,4 +21,4 @@ const CustomField = ({
   );
 };
 
-export default CustomField;
+export default connect(CustomField);

@@ -22,6 +22,15 @@ import styles from './App.module.css';
 
 import CustomField from '../Components/CustomField';
 
+const validationSchema = Yup.object().shape({
+  todo: Yup.object().shape({
+    description: Yup.string()
+      .default('')
+      .required('Type some text to add todo')
+      .min(3, 'Try using more explicit todos to achive better results'),
+  }),
+});
+
 @observer
 class App extends Component {
   createNew = value => {
@@ -53,13 +62,6 @@ class App extends Component {
         </div>
       </ListGroupItem>
     ));
-
-    const validationSchema = Yup.object().shape({
-      todo: Yup.string()
-        .default('')
-        .required('Type some text to add todo')
-        .min(3, 'Try using more explicit todos to achive better results'),
-    });
 
     return (
       <div className="App">
