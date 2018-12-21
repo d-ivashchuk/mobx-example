@@ -75,10 +75,15 @@ class App extends Component {
               initialValues={validationSchema.default()}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
-                this.createNew(values.todo);
+                this.createNew(values.todo.description);
                 setSubmitting(false);
                 resetForm();
               }}
+              // onSubmit={(values, { setSubmitting, resetForm }) => {
+              //   console.log(values);
+              //   setSubmitting(false);
+              //   resetForm();
+              // }}
             >
               {({ isSubmitting }) => (
                 <Form>
