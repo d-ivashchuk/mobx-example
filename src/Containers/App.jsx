@@ -26,8 +26,8 @@ const validationSchema = Yup.object().shape({
   todo: Yup.object().shape({
     description: Yup.string()
       .default('')
-      .required('Type some text to add todo')
-      .min(3, 'Try using more explicit todos to achive better results'),
+      .min(3, 'Try using more explicit todos to achive better results')
+      .required('Type some text to add todo'),
   }),
 });
 

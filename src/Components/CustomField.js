@@ -5,13 +5,12 @@ import { FormControl, ControlLabel } from 'react-bootstrap';
 import { connect, getIn } from 'formik';
 
 const CustomField = ({ field, form: { touched, errors }, ...props }) => {
-  console.log(field.name);
   return (
     <div>
       <ControlLabel>{field.name}</ControlLabel>
-      <FormControl type="text" value={field.value} {...props} />
-      {touched[field.name] && errors[field.name] && (
-        <div className="error">{errors[field.name]}</div>
+      <FormControl type="text" {...field.value} {...props} />
+      {getIn(touched, field.name) && getIn(errors, field.name) && (
+        <div className="error">{getIn(errors, field.name)}</div>
       )}
     </div>
   );
