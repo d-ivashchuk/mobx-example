@@ -20,7 +20,7 @@ import {
 
 import styles from './App.module.css';
 
-import CustomField from '../Components/CustomField';
+import TextField from '../Components/TextField';
 
 const validationSchema = Yup.object().shape({
   todo: Yup.object().shape({
@@ -74,23 +74,24 @@ class App extends Component {
             <Formik
               initialValues={validationSchema.default()}
               validationSchema={validationSchema}
-              onSubmit={(values, { setSubmitting, resetForm }) => {
-                this.createNew(values.todo.description);
-                setSubmitting(false);
-                resetForm();
-              }}
               // onSubmit={(values, { setSubmitting, resetForm }) => {
-              //   console.log(values);
+              //   this.createNew(values.todo.description);
               //   setSubmitting(false);
               //   resetForm();
               // }}
+              onSubmit={(values, { setSubmitting, resetForm }) => {
+                console.log(values);
+                setSubmitting(false);
+                resetForm();
+              }}
             >
               {({ isSubmitting }) => (
                 <Form>
                   <Field
                     type="text"
                     name="todo.description"
-                    component={CustomField}
+                    label="description"
+                    component={TextField}
                   />
                   <button type="submit" disabled={isSubmitting}>
                     Add todo
