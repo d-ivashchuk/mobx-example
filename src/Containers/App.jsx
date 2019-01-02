@@ -87,7 +87,11 @@ class App extends Component {
             >
               {({ isSubmitting }) => (
                 <Form>
-                  <Field type="text" name="todo" component={CustomField} />
+                  <Field
+                    type="text"
+                    name="todo.description"
+                    component={CustomField}
+                  />
                   <button type="submit" disabled={isSubmitting}>
                     Add todo
                   </button>
