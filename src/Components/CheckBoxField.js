@@ -4,7 +4,6 @@ import { Checkbox, ControlLabel } from 'react-bootstrap';
 import { connect } from 'formik';
 
 const CheckBoxField = ({ field, label }) => {
-  console.log(field.value);
   return (
     <React.Fragment>
       <ControlLabel>{label}</ControlLabel>

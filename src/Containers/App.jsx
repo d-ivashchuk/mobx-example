@@ -16,12 +16,14 @@ import {
   Grid,
   Row,
   Col,
+  Tab,
 } from 'react-bootstrap';
 
 import styles from './App.module.css';
 
 import TextField from '../Components/TextField';
 import CheckBoxField from '../Components/CheckBoxField';
+import CustomTabs from '../Components/CustomTabs';
 
 const validationSchema = Yup.object().shape({
   todo: Yup.object().shape({
@@ -29,7 +31,8 @@ const validationSchema = Yup.object().shape({
       .default('')
       .min(3, 'Try using more explicit todos to achive better results')
       .required('Type some text to add todo'),
-    bool: Yup.boolean().default(false),
+    important: Yup.boolean().default(false),
+    tag: Yup.string().default('private'),
   }),
 });
 
@@ -85,18 +88,28 @@ class App extends Component {
             >
               {({ isSubmitting }) => (
                 <Form>
+                  <Field name="todo" component={CustomTabs}>
+                    <Tab eventKey={1} title="Tab 1">
+                      public
+                    </Tab>
+                    <Tab eventKey={2} title="Tab 2">
+                      private
+                    </Tab>
+                  </Field>
                   <Field
                     type="text"
                     name="todo.description"
                     label="description"
                     component={TextField}
                   />
+
                   <Field
                     type="checkbox"
                     name="todo.bool"
                     label="boolean"
                     component={CheckBoxField}
                   />
+
                   <button type="submit" disabled={isSubmitting}>
                     Add todo
                   </button>
