@@ -89,10 +89,10 @@ class App extends Component {
               {({ isSubmitting }) => (
                 <Form>
                   <Field name="todo" component={CustomTabs}>
-                    <Tab eventKey={1} title="Tab 1">
+                    <Tab eventKey="public" title="Tab 1">
                       public
                     </Tab>
-                    <Tab eventKey={2} title="Tab 2">
+                    <Tab eventKey="private" title="Tab 2">
                       private
                     </Tab>
                   </Field>
