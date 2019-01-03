@@ -21,6 +21,7 @@ import {
 import styles from './App.module.css';
 
 import TextField from '../Components/TextField';
+import CheckBoxField from '../Components/CheckBoxField';
 
 const validationSchema = Yup.object().shape({
   todo: Yup.object().shape({
@@ -28,6 +29,7 @@ const validationSchema = Yup.object().shape({
       .default('')
       .min(3, 'Try using more explicit todos to achive better results')
       .required('Type some text to add todo'),
+    bool: Yup.boolean().default(false),
   }),
 });
 
@@ -74,13 +76,9 @@ class App extends Component {
             <Formik
               initialValues={validationSchema.default()}
               validationSchema={validationSchema}
-              // onSubmit={(values, { setSubmitting, resetForm }) => {
-              //   this.createNew(values.todo.description);
-              //   setSubmitting(false);
-              //   resetForm();
-              // }}
               onSubmit={(values, { setSubmitting, resetForm }) => {
-                console.log(values);
+                console.log(values.todo.bool);
+                this.createNew(values.todo.description);
                 setSubmitting(false);
                 resetForm();
               }}
@@ -92,6 +90,12 @@ class App extends Component {
                     name="todo.description"
                     label="description"
                     component={TextField}
+                  />
+                  <Field
+                    type="checkbox"
+                    name="todo.bool"
+                    label="boolean"
+                    component={CheckBoxField}
                   />
                   <button type="submit" disabled={isSubmitting}>
                     Add todo

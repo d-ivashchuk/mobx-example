@@ -1,22 +1,15 @@
 import React from 'react';
 
-import { FormControl, ControlLabel } from 'react-bootstrap';
-import { connect, getIn } from 'formik';
+import { Checkbox, ControlLabel } from 'react-bootstrap';
+import { connect } from 'formik';
 
-const CheckBoxField = ({
-  field,
-  label,
-  form: { touched, errors },
-  ...props
-}) => {
+const CheckBoxField = ({ field, label }) => {
+  console.log(field.value);
   return (
-    <div>
-      {/* <ControlLabel>{label}</ControlLabel>
-      <FormControl type="text" {...field} {...props} />
-      {getIn(touched, field.name) && getIn(errors, field.name) && (
-        <div className="error">{getIn(errors, field.name)}</div>
-      )} */}
-    </div>
+    <React.Fragment>
+      <ControlLabel>{label}</ControlLabel>
+      <Checkbox checked={field.value} {...field} />
+    </React.Fragment>
   );
 };
 
