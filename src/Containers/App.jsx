@@ -17,7 +17,6 @@ import {
   Row,
   Col,
   Tab,
-  Radio,
 } from 'react-bootstrap';
 
 import styles from './App.module.css';
@@ -35,8 +34,7 @@ const validationSchema = Yup.object().shape({
       .required('Type some text to add todo'),
     important: Yup.boolean().default(false),
     tag: Yup.string().default('private'),
-    categories: Yup.array().default(['a', 'b', 'c']),
-    currentCategory: Yup.string().default(''),
+    currentCategory: Yup.string().default('b'),
   }),
 });
 
@@ -114,18 +112,15 @@ class App extends Component {
                     component={CheckBoxField}
                   />
                   <Field
-                    name="todo.categories"
-                    label="radio"
-                    component={RadioField}
-                  />
-                  <Field
                     name="todo.currentCategory"
                     label="controlledRadio"
                     component={RadioField}
-                  >
-                    <Radio name="radioGroup">test1</Radio>
-                    <Radio name="radioGroup">test2</Radio>
-                  </Field>
+                    options={[
+                      { label: 'a', value: 'a' },
+                      { label: 'b', value: 'b' },
+                      { label: 'c', value: 'c' },
+                    ]}
+                  />
 
                   <button type="submit" disabled={isSubmitting}>
                     Add todo

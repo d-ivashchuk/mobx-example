@@ -2,12 +2,17 @@ import React from 'react';
 
 import { ControlLabel, FormGroup, Radio } from 'react-bootstrap';
 
-const CheckBoxField = ({ field, label, children }) => {
+const RadioField = ({ field, label, form, options }) => {
   const radioGroup =
-    field.value && Array.isArray(field.value)
-      ? field.value.map(e => (
-          <Radio key={e} name="radioGroup">
-            {e}
+    options && Array.isArray(options)
+      ? options.map(element => (
+          <Radio
+            checked={field.value === element.value}
+            key={element.label}
+            name="radioGroup"
+            onChange={() => form.setFieldValue(field.name, element.value)}
+          >
+            {element.value}
           </Radio>
         ))
       : null;
@@ -15,9 +20,8 @@ const CheckBoxField = ({ field, label, children }) => {
     <FormGroup>
       <ControlLabel>{label}</ControlLabel>
       {radioGroup}
-      {children}
     </FormGroup>
   );
 };
 
-export default CheckBoxField;
+export default RadioField;
