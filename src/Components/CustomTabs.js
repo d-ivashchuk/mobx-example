@@ -6,7 +6,7 @@ const CustomTabs = ({ children, field, form }) => {
   console.log(field.value);
   return (
     <Tabs
-      activeKey={field.value.tag}
+      activeKey={field.value}
       onSelect={val => {
         form.setFieldValue(field.name, val);
       }}

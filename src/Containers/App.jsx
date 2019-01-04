@@ -17,6 +17,7 @@ import {
   Row,
   Col,
   Tab,
+  Radio,
 } from 'react-bootstrap';
 
 import styles from './App.module.css';
@@ -24,6 +25,7 @@ import styles from './App.module.css';
 import TextField from '../Components/TextField';
 import CheckBoxField from '../Components/CheckBoxField';
 import CustomTabs from '../Components/CustomTabs';
+import RadioField from '../Components/RadioField';
 
 const validationSchema = Yup.object().shape({
   todo: Yup.object().shape({
@@ -33,6 +35,8 @@ const validationSchema = Yup.object().shape({
       .required('Type some text to add todo'),
     important: Yup.boolean().default(false),
     tag: Yup.string().default('private'),
+    categories: Yup.array().default(['a', 'b', 'c']),
+    currentCategory: Yup.string().default(''),
   }),
 });
 
@@ -80,7 +84,7 @@ class App extends Component {
               initialValues={validationSchema.default()}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
-                console.log(values.todo.bool);
+                console.log(values.todo);
                 this.createNew(values.todo.description);
                 setSubmitting(false);
                 resetForm();
@@ -88,7 +92,7 @@ class App extends Component {
             >
               {({ isSubmitting }) => (
                 <Form>
-                  <Field name="todo" component={CustomTabs}>
+                  <Field name="todo.tag" component={CustomTabs}>
                     <Tab eventKey="public" title="Tab 1">
                       public
                     </Tab>
@@ -109,6 +113,19 @@ class App extends Component {
                     label="boolean"
                     component={CheckBoxField}
                   />
+                  <Field
+                    name="todo.categories"
+                    label="radio"
+                    component={RadioField}
+                  />
+                  <Field
+                    name="todo.currentCategory"
+                    label="controlledRadio"
+                    component={RadioField}
+                  >
+                    <Radio name="radioGroup">test1</Radio>
+                    <Radio name="radioGroup">test2</Radio>
+                  </Field>
 
                   <button type="submit" disabled={isSubmitting}>
                     Add todo
