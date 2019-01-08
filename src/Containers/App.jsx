@@ -25,6 +25,7 @@ import TextField from '../Components/TextField';
 import CheckBoxField from '../Components/CheckBoxField';
 import CustomTabs from '../Components/CustomTabs';
 import RadioField from '../Components/RadioField';
+import CheckboxGroupField from '../Components/CheckboxGroupField';
 
 const validationSchema = Yup.object().shape({
   todo: Yup.object().shape({
@@ -35,6 +36,7 @@ const validationSchema = Yup.object().shape({
     important: Yup.boolean().default(false),
     tag: Yup.string().default('private'),
     currentCategory: Yup.string().default('b'),
+    tags: Yup.array().default(() => ['x', 'y']),
   }),
 });
 
@@ -98,6 +100,7 @@ class App extends Component {
                       private
                     </Tab>
                   </Field>
+
                   <Field
                     type="text"
                     name="todo.description"
@@ -111,6 +114,17 @@ class App extends Component {
                     label="boolean"
                     component={CheckBoxField}
                   />
+                  <Field
+                    name="todo.tags"
+                    label="tags"
+                    component={CheckboxGroupField}
+                    options={[
+                      { label: 'x', value: 'x' },
+                      { label: 'y', value: 'y' },
+                      { label: 'z', value: 'z' },
+                    ]}
+                  />
+
                   <Field
                     name="todo.currentCategory"
                     label="controlledRadio"
