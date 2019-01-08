@@ -38,7 +38,7 @@ const validationSchema = Yup.object().shape({
     currentCategory: Yup.string().default('b'),
     tags: Yup.array(Yup.string())
       .default(() => ['x', 'y'])
-      .required('Choose at least one checkbox'),
+      .min(2, 'Choose at least two checkbox'),
   }),
 });
 

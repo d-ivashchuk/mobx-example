@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Checkbox, ControlLabel, Button } from 'react-bootstrap';
-import { connect, getIn } from 'formik';
+import { getIn } from 'formik';
 
 const CheckboxGroupField = ({ options, field, label, form }) => {
   const checkboxGroup = options.map(element => {
@@ -44,4 +44,4 @@ const CheckboxGroupField = ({ options, field, label, form }) => {
   );
 };
 
-export default connect(CheckboxGroupField);
+export default CheckboxGroupField;
