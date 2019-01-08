@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Checkbox, ControlLabel, Button } from 'react-bootstrap';
+import { connect, getIn } from 'formik';
 
 const CheckboxGroupField = ({ options, field, label, form }) => {
   const checkboxGroup = options.map(element => {
@@ -26,6 +27,9 @@ const CheckboxGroupField = ({ options, field, label, form }) => {
     <React.Fragment>
       <ControlLabel>{label}</ControlLabel>
       {checkboxGroup}
+      {getIn(form.touched, field.name) && getIn(form.errors, field.name) && (
+        <div className="error">{getIn(form.errors, field.name)}</div>
+      )}
       <Button
         onClick={() =>
           form.setFieldValue(field.name, options.map(i => i.value))
@@ -40,4 +44,4 @@ const CheckboxGroupField = ({ options, field, label, form }) => {
   );
 };
 
-export default CheckboxGroupField;
+export default connect(CheckboxGroupField);
